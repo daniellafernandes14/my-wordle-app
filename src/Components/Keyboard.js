@@ -16,36 +16,44 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
           console.log('try again');
         } else if (dictionaryWords.includes(guessWord)) {
           console.log('unlucky- try again');
-          rowIndex = ++rowIndex;
-          tileIndex = 0;
-          console.log(rowIndex, tileIndex);
-          tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
-          enterLetter(tile, letter)
+          incorrectWord(tile, letter)
         } else {
           console.log('that is not a word');
         }
         break;
-      case '<<':
-        if(tileIndex !== 0) {
-          tileIndex--;
-          tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
-          tile.textContent = '';
-          guessRows[rowIndex][tileIndex] = '';
-        }
-        break;
-      default:
-        enterLetter(tile, letter)
+        case '<<':
+          deleteLetter();
+          break;
+        default:
+          enterLetter(tile, letter)
       }
-  }
-
-  const enterLetter = (tile, letter) => {
-    if(tileIndex !== 5 && letter !== 'ENTER') {
-      tile.textContent = letter;
-      console.log(tile);
-      guessRows[rowIndex][tileIndex] = letter;
-      tileIndex++;
     }
-  }
+
+    const enterLetter = (tile, letter) => {
+      if(tileIndex !== 5 && letter !== 'ENTER') {
+        tile.textContent = letter;
+        console.log(tile);
+        guessRows[rowIndex][tileIndex] = letter;
+        tileIndex++;
+      }
+    }
+
+    const deleteLetter = (tile) => {
+      if(tileIndex !== 0) {
+        tileIndex--;
+        tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+        tile.textContent = '';
+        guessRows[rowIndex][tileIndex] = '';
+      }
+    }
+
+    const incorrectWord = (tile, letter) => {
+      rowIndex = ++rowIndex;
+      tileIndex = 0;
+      tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+      enterLetter(tile, letter)
+    }
+
 
   const qwerty = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
