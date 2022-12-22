@@ -1,24 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+// import { useEffect } from "react"
+import Row from './Components/Row';
+import Keyboard from './Components/Keyboard';
 
 function App() {
+  // useEffect(() => {
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-RapidAPI-Key': '',
+  //       'X-RapidAPI-Host': 'random-words5.p.rapidapi.com',
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     }
+  //   };
+
+  //   const selectWord = async () => {
+  //     await fetch('https://random-words5.p.rapidapi.com/getRandom', options)
+  //       .then(response => response.json())
+  //       .then(data => console.log(data))
+  //       .catch(err => console.error(err));
+  //   };
+  //   selectWord();
+  // }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className="container">
+      <div className='header'>
+        <h1>Wordle</h1>
+      </div>
+      <div className='tile-container'>
+        <Row />
+      </div>
+      <div className='keys-container'>
+        <Keyboard />
+      </div>
     </div>
+    </>
   );
 }
 
