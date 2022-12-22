@@ -12,6 +12,10 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
         const guessWord = guessRows[rowIndex].join('');
         if (guessWord === dailyWord.toUpperCase()) {
           alert('congrats');
+          const button = document.getElementsByTagName('button');
+          for (let i = 0; i < button.length; i++) {
+            button[i].disabled = true;
+          }
         } else if (guessWord.length !== 5) {
           console.log('try again');
         } else if (dictionaryWords.includes(guessWord)) {
