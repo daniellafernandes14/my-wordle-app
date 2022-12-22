@@ -1,23 +1,14 @@
 import {Tile, TileContainer} from './Row.style.js';
 
-const Row = () => {
-  const guessRows = [
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', '']
-  ]
-
+const Row = ({guessRows}) => {
   return(
     <div>
-      {guessRows.map(row => {
+      {guessRows.map((row, rowIndex) => {
         return (
-          <TileContainer>
-            {row.map(tile => {
+          <TileContainer key={`${guessRows.indexOf(row)}`}>
+            {row.map((tile, tileIndex) => {
               return (
-                <Tile>{tile}</Tile>
+                <Tile id={`row-${rowIndex}-tile-${tileIndex}`} key={`tile-${tileIndex}`}>{tile}</Tile>
               )
             })}
           </TileContainer>

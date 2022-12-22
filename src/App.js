@@ -4,6 +4,14 @@ import Row from './Components/Row';
 import Keyboard from './Components/Keyboard';
 
 function App() {
+  const guessRows = [
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', '']
+  ]
   // useEffect(() => {
   //   const options = {
   //     method: 'GET',
@@ -31,10 +39,10 @@ function App() {
         <h1>Wordle</h1>
       </div>
       <div className='tile-container'>
-        <Row />
+          <Row guessRows={guessRows} />
       </div>
       <div className='keys-container'>
-        <Keyboard />
+          <Keyboard guessRows={guessRows} />
       </div>
     </div>
     </>
