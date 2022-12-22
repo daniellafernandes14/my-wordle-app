@@ -12,6 +12,9 @@ function App() {
     ['', '', '', '', ''],
     ['', '', '', '', '']
   ]
+
+  const dailyWord = 'clone';
+
   // useEffect(() => {
   //   const options = {
   //     method: 'GET',
@@ -42,7 +45,7 @@ function App() {
           <Row guessRows={guessRows} />
       </div>
       <div className='keys-container'>
-          <Keyboard guessRows={guessRows} />
+          <Keyboard guessRows={guessRows} dailyWord={dailyWord} />
       </div>
     </div>
     </>

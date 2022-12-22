@@ -1,23 +1,36 @@
 import {Key} from './Keyboard.style';
 
-const Keyboard = ({guessRows}) => {
+const Keyboard = ({ guessRows, dailyWord }) => {
   let rowIndex = 0;
   let tileIndex = 0;
 
   const selectLetter = (event) => {
     const letter = event.currentTarget.textContent
-    const tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
-    if(letter === 'ENTER') {
-      console.log('here');
-    } if(letter === '<<') {
-      tile.textContent = '';
-      tileIndex--;
-      guessRows[tileIndex] = '';
-    } else {
-      tile.textContent = letter;
-      console.log(tile);
-      guessRows[tileIndex] = letter;
-      tileIndex++;
+    let tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+    switch(letter) {
+      case 'ENTER':
+        const guessWord = guessRows[rowIndex].join('');
+        if (guessWord === dailyWord.toUpperCase()) {
+          alert('congrats');
+        } else {
+          alert('incorrect');
+        }
+        break;
+      case '<<':
+        if(tileIndex !== 0) {
+          tileIndex--;
+          tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+          tile.textContent = '';
+          guessRows[rowIndex][tileIndex] = '';
+        }
+        break;
+      default:
+        if(tileIndex !== 5) {
+          tile.textContent = letter;
+          console.log(tile);
+          guessRows[rowIndex][tileIndex] = letter;
+          tileIndex++;
+        }
     }
   }
 
