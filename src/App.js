@@ -15,6 +15,8 @@ function App() {
 
   const dailyWord = 'clone';
 
+  const dictionaryWords = ['CLONE', 'TEETH', 'SHARE', 'GLASS'];
+
   // useEffect(() => {
   //   const options = {
   //     method: 'GET',
@@ -45,7 +47,7 @@ function App() {
           <Row guessRows={guessRows} />
       </div>
       <div className='keys-container'>
-          <Keyboard guessRows={guessRows} dailyWord={dailyWord} />
+          <Keyboard guessRows={guessRows} dailyWord={dailyWord} dictionaryWords={dictionaryWords} />
       </div>
     </div>
     </>

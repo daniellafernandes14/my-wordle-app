@@ -1,6 +1,6 @@
 import {Key} from './Keyboard.style';
 
-const Keyboard = ({ guessRows, dailyWord }) => {
+const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   let rowIndex = 0;
   let tileIndex = 0;
 
@@ -12,8 +12,17 @@ const Keyboard = ({ guessRows, dailyWord }) => {
         const guessWord = guessRows[rowIndex].join('');
         if (guessWord === dailyWord.toUpperCase()) {
           alert('congrats');
+        } else if (guessWord.length !== 5) {
+          console.log('try again');
+        } else if (dictionaryWords.includes(guessWord)) {
+          console.log('unlucky- try again');
+          rowIndex = ++rowIndex;
+          tileIndex = 0;
+          console.log(rowIndex, tileIndex);
+          tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+          enterLetter(tile, letter)
         } else {
-          alert('incorrect');
+          console.log('that is not a word');
         }
         break;
       case '<<':
@@ -25,12 +34,16 @@ const Keyboard = ({ guessRows, dailyWord }) => {
         }
         break;
       default:
-        if(tileIndex !== 5) {
-          tile.textContent = letter;
-          console.log(tile);
-          guessRows[rowIndex][tileIndex] = letter;
-          tileIndex++;
-        }
+        enterLetter(tile, letter)
+      }
+  }
+
+  const enterLetter = (tile, letter) => {
+    if(tileIndex !== 5 && letter !== 'ENTER') {
+      tile.textContent = letter;
+      console.log(tile);
+      guessRows[rowIndex][tileIndex] = letter;
+      tileIndex++;
     }
   }
 

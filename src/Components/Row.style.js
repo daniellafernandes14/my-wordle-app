@@ -5,6 +5,10 @@ export const Tile = styled.div`
   height: 2.5rem;
   width: 2.5rem;
   margin: 2px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 `;
 
 export const TileContainer = styled.div`
