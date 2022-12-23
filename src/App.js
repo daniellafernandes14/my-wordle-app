@@ -43,6 +43,7 @@ function App() {
       <div className='header'>
         <h1>Wordle</h1>
       </div>
+      <div id='message'></div>
       <div className='tile-container'>
           <Row guessRows={guessRows} />
       </div>

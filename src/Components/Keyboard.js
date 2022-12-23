@@ -1,4 +1,5 @@
 import {Key} from './Keyboard.style';
+import { disableButtons, showWinningMessage } from '../function-utils';
 
 const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   let rowIndex = 0;
@@ -7,24 +8,28 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   const selectLetter = (event) => {
     const letter = event.currentTarget.textContent
     let tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
+    const guessWord = guessRows[rowIndex].join('');
+    const correctWord = guessWord === dailyWord.toUpperCase();
+    const incompleteWord = guessWord.length !== 5;
+    const incorrectWord = dictionaryWords.includes(guessWord);
     switch(letter) {
       case 'ENTER':
-        const guessWord = guessRows[rowIndex].join('');
-        if (guessWord === dailyWord.toUpperCase()) {
-          alert('congrats');
+        if (correctWord) {
+          checkingLetters();
+          setTimeout(showWinningMessage(), -1000);
           disableButtons();
-        } else if (guessWord.length !== 5) {
-          console.log('try again');
-        } else if (dictionaryWords.includes(guessWord)) {
+        } else if (incompleteWord) {
+          console.log('incomplete word')
+        } else if (incorrectWord) {
           console.log('unlucky- try again');
           checkingLetters()
-          incorrectWord(tile, letter)
+          wrongWord(tile, letter)
         } else {
           console.log('that is not a word');
         }
         break;
       case '<<':
-        deleteLetter();
+        deleteLetter(tile);
         break;
       default:
         enterLetter(tile, letter)
@@ -32,20 +37,20 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   }
 
   const enterLetter = (tile, letter) => {
-    if(tileIndex !== 5 && letter !== 'ENTER') {
+    if (tileIndex !== 5 && letter !== 'ENTER') {
       tile.textContent = letter;
       console.log(tile);
       guessRows[rowIndex][tileIndex] = letter;
       tileIndex++;
     }
-    if(rowIndex === 6) {
+    if (rowIndex === 6) {
       console.log('unlucky - better luck next time')
       disableButtons();
     }
   }
 
   const deleteLetter = (tile) => {
-    if(tileIndex !== 0) {
+    if (tileIndex !== 0) {
       tileIndex--;
       tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
       tile.textContent = '';
@@ -53,18 +58,11 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
     }
   }
 
-  const incorrectWord = (tile, letter) => {
+  const wrongWord = (tile, letter) => {
     rowIndex = ++rowIndex;
     tileIndex = 0;
     tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);
     enterLetter(tile, letter)
-  }
-
-  const disableButtons = () => {
-    const button = document.getElementsByTagName('button');
-    for (let i = 0; i < button.length; i++) {
-      button[i].disabled = true;
-    }
   }
 
   // dailyWord = GLASS
@@ -77,18 +75,17 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
       const correctPosition = guessLetter === dailyWord[tileIndex].toUpperCase();
       const letterExists = dailyWord.toUpperCase().includes(guessLetter);
 
-      // Change colour of tile if letter is in the correct place
+      // Change colour of tile to green if letter is in the correct place
       if (correctPosition) {
-        changingTile.style.backgroundColor = 'green';
+        changingTile.style.backgroundColor = '#78e88b';
       }
-      // Change colour of tile if letter exists but is in the wrong place
+      // Change colour of tile to orange if letter exists but is in the wrong place
       if (letterExists && !correctPosition) {
         changingTile.style.backgroundColor = 'orange';
       }
-      // Change colour of tile if letter doesn't exist
+      // Change colour of tile to dark grey if letter doesn't exist
       if (!letterExists) {
-        console.log('letter does not exist');
-        changingTile.style.backgroundColor = 'red';
+        changingTile.style.backgroundColor = '#a4a7ab';
       }
     })
   }

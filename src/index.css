@@ -17,6 +17,25 @@ code {
   margin: 2rem;
 }
 
+.header h1 {
+  margin: 0;
+}
+
 .keys-container {
   margin: 0.5rem;
+}
+
+#message {
+  height: 2rem;
+}
+
+.message {
+  background-color: #818384;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 0.1rem 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0.5rem auto;
+  color: white;
 }
