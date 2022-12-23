@@ -13,9 +13,9 @@ function App() {
     ['', '', '', '', '']
   ]
 
-  const dailyWord = 'clone';
+  const dailyWord = 'glass';
 
-  const dictionaryWords = ['CLONE', 'TEETH', 'SHARE', 'GLASS'];
+  const dictionaryWords = ['CLONE', 'TEETH', 'SHARE', 'GLASS', 'CROWD', 'LOADS', 'CRASS'];
 
   // useEffect(() => {
   //   const options = {
