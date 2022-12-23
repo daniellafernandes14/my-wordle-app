@@ -1,5 +1,5 @@
 import {Key} from './Keyboard.style';
-import { disableButtons, showWinningMessage } from '../function-utils';
+import { disableButtons, showMessage } from '../function-utils';
 
 const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   let rowIndex = 0;
@@ -16,14 +16,15 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
       case 'ENTER':
         if (correctWord) {
           checkingLetters();
-          setTimeout(showWinningMessage(), -1000);
+          showMessage('YOU WIN');
           disableButtons();
         } else if (incompleteWord) {
           console.log('incomplete word')
+          showMessage('Please enter a 5 letter word');
         } else if (incorrectWord) {
           console.log('unlucky- try again');
           checkingLetters()
-          wrongWord(tile, letter)
+          moveToNextRow(tile, letter)
         } else {
           console.log('that is not a word');
         }
@@ -58,7 +59,7 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
     }
   }
 
-  const wrongWord = (tile, letter) => {
+  const moveToNextRow = (tile, letter) => {
     rowIndex = ++rowIndex;
     tileIndex = 0;
     tile = document.getElementById(`row-${rowIndex}-tile-${tileIndex}`);

@@ -5,13 +5,23 @@ export const disableButtons = () => {
   }
 }
 
-export const showWinningMessage = () => {
+
+export const showMessage = (message) => {
   const element = document.createElement('p');
   const position = document.getElementById('message');
   element.classList.add('message');
-  element.innerHTML = 'YOU WIN';
+  element.textContent = message;
   position.append(element);
+  setTimeout(() => position.removeChild(element), 4000);
 }
+
+// export const showIncompleteMessage = () => {
+//   const element = document.createElement('p');
+//   const position = document.getElementById('message');
+//   element.classList.add('message');
+//   element.innerHTML = `Please enter a 5 letter word`;
+//   position.append(element);
+// }
 
 export const showLosingMessage = (dailyWord) => {
   const element = document.createElement('p');

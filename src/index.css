@@ -18,7 +18,11 @@ code {
 }
 
 .header h1 {
-  margin: 0;
+  margin: 0.5rem;
+}
+
+.tile-container {
+  margin-bottom: 1rem;
 }
 
 .keys-container {
@@ -32,10 +36,11 @@ code {
 .message {
   background-color: #818384;
   width: fit-content;
+  height: fit-content;
   border-radius: 0.5rem;
   padding: 0.1rem 1rem;
   font-weight: bold;
   text-align: center;
-  margin: 0.5rem auto;
+  margin: 0 auto;
   color: white;
 }
