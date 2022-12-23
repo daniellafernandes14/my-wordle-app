@@ -19,14 +19,11 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
           showMessage('YOU WIN');
           disableButtons();
         } else if (incompleteWord) {
-          console.log('incomplete word')
           showMessage('Please enter a 5 letter word');
         } else if (incorrectWord) {
-          console.log('unlucky- try again');
           checkingLetters()
           moveToNextRow(tile, letter)
         } else {
-          console.log('that is not a word');
           showMessage('Not a real word');
         }
         break;
@@ -41,12 +38,10 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
   const enterLetter = (tile, letter) => {
     if (tileIndex !== 5 && letter !== 'ENTER') {
       tile.textContent = letter;
-      console.log(tile);
       guessRows[rowIndex][tileIndex] = letter;
       tileIndex++;
     }
     if (rowIndex === 6) {
-      console.log('unlucky - better luck next time')
       showMessage(`Bad luck - today's wordle was ${dailyWord.toUpperCase()}`)
       disableButtons();
     }
