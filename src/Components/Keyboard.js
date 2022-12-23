@@ -27,6 +27,7 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
           moveToNextRow(tile, letter)
         } else {
           console.log('that is not a word');
+          showMessage('Not a real word');
         }
         break;
       case '<<':
@@ -46,6 +47,7 @@ const Keyboard = ({ guessRows, dailyWord, dictionaryWords }) => {
     }
     if (rowIndex === 6) {
       console.log('unlucky - better luck next time')
+      showMessage(`Bad luck - today's wordle was ${dailyWord.toUpperCase()}`)
       disableButtons();
     }
   }
